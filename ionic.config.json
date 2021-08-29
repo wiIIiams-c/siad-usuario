@@ -1,0 +1,7 @@
+{
+  "name": "siad-usuario",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
