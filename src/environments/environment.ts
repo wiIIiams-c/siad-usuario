@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://www.despachonacional.cl/siad_automatico/index.php'
+  url: 'https://www.despachonacional.cl/siad_api/index.php'
 };
 
 /*
