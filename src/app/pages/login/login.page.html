@@ -5,7 +5,7 @@
         <ion-grid fixed>
           <ion-row>
             <ion-col>
-              <img src="/assets/avatars/av-1.png">
+              <img src="/assets/avatars/logo_claro_rojo.png">
             </ion-col>
           </ion-row>
 
@@ -13,8 +13,8 @@
             <ion-col>
               <ion-list>
                 <ion-item>
-                  <ion-label>Email</ion-label>
-                  <ion-input name="email" type="email" [(ngModel)]="loginUser.email" required></ion-input>
+                  <ion-label>Usuario</ion-label>
+                  <ion-input name="user" type="text" [(ngModel)]="loginUser.user" required></ion-input>
                 </ion-item>
 
                 <ion-item>
@@ -79,16 +79,16 @@
   <ion-toolbar>
     <ion-row>
       <ion-col>
-        <ion-button shape="round" expand="full" size="small" fill="outline" color="tertiary" (click)="mostrarLogin()">
+        <!-- <ion-button shape="round" expand="full" size="small" fill="outline" color="tertiary" (click)="mostrarLogin()">
           Ingresar
-        </ion-button>
+        </ion-button> -->
       </ion-col>
 
       <ion-col>
-        <ion-button shape="round" expand="full" size="small" fill="outline" color="tertiary"
+        <!-- <ion-button shape="round" expand="full" size="small" fill="outline" color="tertiary"
           (click)="mostrarRegistro()">
           Registrarme
-        </ion-button>
+        </ion-button> -->
       </ion-col>
     </ion-row>
   </ion-toolbar>
