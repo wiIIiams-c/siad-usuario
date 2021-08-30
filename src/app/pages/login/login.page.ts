@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   @ViewChild('slidePrincipal') slides: IonSlides;
   
   loginUser = {
-    email: 'usuario4@usuario.cl',
+    user: 'willtest',
     password: '123456'
   }
 
@@ -37,6 +37,12 @@ export class LoginPage implements OnInit {
   async login(fLogin: NgForm){
     if(fLogin.invalid){ return; }
 
-    //const valido = await this.accesoService
+    const valido = await this.accesoService.login(this.loginUser.user, this.loginUser.password);
+
+    if(valido){
+      console.log('es valido');
+    }else{
+      this.uiService.alertaInformativa('Usuario y/o Password Incorrectos');
+    }
   }
 }
