@@ -12,6 +12,7 @@ const URL = environment.url;
 })
 export class AccesoService {
   private usuario: Usuario = {};
+  token: string = null;
 
   constructor(
     private http: HttpClient,
@@ -29,6 +30,75 @@ export class AccesoService {
       this.http.post(`${ URL }/app_login`, formData).subscribe(
         async resp => {
           console.log(resp);
+
+          if(resp['status']){
+            this.guardarToken(resp['token']);
+            resolve(true);
+          }else{
+            this.token = null;
+            this.storage.clear();
+            resolve(false);
+          }
+        }
+      );
+    });
+  }
+
+  logout(){
+    this.token = null;
+    this.usuario = null;
+    this.storage.clear();
+    this.navCtrl.navigateRoot('/login', { animated: true });
+  }
+
+  async guardarToken(token: string){
+    this.token = token;
+    await this.storage.set('token', token);
+    await this.validaToken();
+  }
+
+  async cargarToken(){
+    this.token = await this.storage.get('token') || null;
+    console.log('cargar token');
+    console.log(this.token);
+  }
+
+  async validaToken(): Promise<boolean>{
+    await this.cargarToken();
+
+    if(!this.token){
+      this.navCtrl.navigateRoot('/login');
+      return Promise.resolve(false);
+    }
+
+    return new Promise<boolean>(resolve => {
+      /* const headers = new HttpHeaders({
+        'x-token': this.token
+      }); */
+
+      const formData = new FormData();
+      formData.append('x-token', this.token);
+
+      /* console.log('forms validatoken');
+      console.log(formData);
+
+      console.log('headers validatoken');
+      console.log(headers); */
+
+      this.http.post(`${ URL }/app_token`, formData).subscribe(
+        resp => {
+          console.log('from app_token');
+          console.log(resp);
+          
+          if(resp['status']){
+            this.usuario = resp['usuario'];
+            console.log(this.usuario);
+            
+            resolve(true);
+          }else{
+            this.navCtrl.navigateRoot('/login');
+            resolve(false);
+          }
         }
       );
     });
