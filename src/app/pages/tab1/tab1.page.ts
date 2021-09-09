@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Usuario } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-tab1',
@@ -6,7 +8,32 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  usuarios: Usuario[] = [];
+  habilitado = true;
 
-  constructor() {}
+  constructor(
+    private usuarioService: UsuarioService
+  ) {}
 
+  ngOnInit(){
+    this.siguientes();
+  }
+
+  siguientes(event?, pull: boolean = false){
+    this.usuarioService.getUsuarios(pull).subscribe(
+      resp => {
+        console.log('tab1 siguientes');
+        console.log(resp);
+        this.usuarios.push(...resp.usuarios);
+
+        if(event){
+          event.target.complete();
+
+          if(resp.usuarios.length === 0){
+            this.habilitado = false;
+          }
+        }
+      }
+    );
+  }
 }
