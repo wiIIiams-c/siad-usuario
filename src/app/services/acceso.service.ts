@@ -21,7 +21,6 @@ export class AccesoService {
   ) { }
 
   login(user: string, password: string){
-    //const data = { _user: user, _passwd: password };
     const formData = new FormData();
     formData.append('_user', user);
     formData.append('_passwd', password);
@@ -72,18 +71,8 @@ export class AccesoService {
     }
 
     return new Promise<boolean>(resolve => {
-      /* const headers = new HttpHeaders({
-        'x-token': this.token
-      }); */
-
       const formData = new FormData();
       formData.append('x-token', this.token);
-
-      /* console.log('forms validatoken');
-      console.log(formData);
-
-      console.log('headers validatoken');
-      console.log(headers); */
 
       this.http.post(`${ URL }/app_token`, formData).subscribe(
         resp => {
