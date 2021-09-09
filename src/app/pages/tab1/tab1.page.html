@@ -1,17 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="people-outline"></ion-icon>
+    </ion-buttons>
     <ion-title>
-      Tab 1
+      Usuarios SIAD
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="light">
+  <!-- Refreshser -->
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!-- Usuarios -->
+  <app-usuarios [usuarios]="usuarios"></app-usuarios>
+  <!-- <app-posts [posts]="posts"></app-posts> -->
+
+  <!-- Inifinity Scroll -->
+  <!-- <ion-infinite-scroll [disabled]="!habilitado" threshold="150px" (ionInfinite)="siguientes($event)">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
 </ion-content>
