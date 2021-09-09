@@ -1,3 +1,9 @@
+export interface RespuestaUsuarios {
+    ok: boolean;
+    pagina: number;
+    usuarios: Usuario[];
+}
+
 export interface Usuario {
     id?: string;
     nombre?: string;
