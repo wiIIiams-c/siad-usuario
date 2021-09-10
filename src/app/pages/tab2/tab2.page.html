@@ -1,17 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="search-circle-outline"></ion-icon>
+    </ion-buttons>
     <ion-title>
-      Tab 2
+      Buscador Usuarios
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-toolbar>
+  <ion-searchbar placeholder="Buscar Usuario" (ionChange)="onSearchChange($event)" [debounce]="700" [value]="usuarioBuscar" animated></ion-searchbar>
+</ion-toolbar>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content color="light">
+  <!-- Spinner -->
+  <ion-grid fixed *ngIf="buscando">
+    <ion-row>
+      <ion-col>
+        <ion-spinner name="dots"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <!-- Refreshser -->
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
+
+  <!-- Usuarios -->
+  <app-usuarios [usuarios]="usuarios"></app-usuarios>
+
+  <!-- Inifinity Scroll -->
+  <!-- <ion-infinite-scroll [disabled]="!habilitado" threshold="150px" (ionInfinite)="siguientes($event)">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
 </ion-content>
