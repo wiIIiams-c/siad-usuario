@@ -27,4 +27,8 @@ export class UsuarioService {
     return this.http.get<RespuestaUsuarios>(`${ URL }/app_users/${ this.paginaUsuario }`);
     //return this.http.get<RespuestaUsuarios>(`${ URL }/app_users`);
   }
+
+  buscarUsuarios(buscar: string){
+    return this.http.get<RespuestaUsuarios>(`${ URL }/app_busca/${ buscar }`);
+  }
 }
