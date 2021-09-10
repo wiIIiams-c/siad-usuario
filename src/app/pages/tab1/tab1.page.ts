@@ -19,6 +19,12 @@ export class Tab1Page {
     this.siguientes();
   }
 
+  recargar(event){
+    this.siguientes(event, true);
+    this.habilitado = true;
+    this.usuarios = [];
+  }
+
   siguientes(event?, pull: boolean = false){
     this.usuarioService.getUsuarios(pull).subscribe(
       resp => {
