@@ -31,4 +31,24 @@ export class UsuarioService {
   buscarUsuarios(buscar: string){
     return this.http.get<RespuestaUsuarios>(`${ URL }/app_busca/${ buscar }`);
   }
+
+  actualizaUsuarioEstado(usr_id: string, usr_estado: string){
+    const formData = new FormData();
+    formData.append('_userId', usr_id);
+    formData.append('_userEstado', usr_estado);
+
+    return new Promise(resolve => {
+      this.http.post(`${ URL }/app_estado`, formData).subscribe(
+        async resp => {
+          console.log(resp);
+
+          if(resp['status']){
+            resolve(true);
+          }else{
+            resolve(false);
+          }
+        }
+      );
+    });
+  }
 }
