@@ -20,13 +20,10 @@ export class UsuariosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('init componentes usuarios');
-    console.log(this.usuarios);
+    
   }
 
   async actualizaEstado(user: Usuario){
-    console.log('log acutalizaEstado');
-    console.log(user);
     const valido = await this.usuarioService.actualizaUsuarioEstado(user.id, user.activo);
 
     if(valido){

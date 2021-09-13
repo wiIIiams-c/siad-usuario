@@ -28,8 +28,6 @@ export class AccesoService {
     return new Promise(resolve => {
       this.http.post(`${ URL }/app_login`, formData).subscribe(
         async resp => {
-          console.log(resp);
-
           if(resp['status']){
             this.guardarToken(resp['token']);
             resolve(true);
@@ -58,8 +56,6 @@ export class AccesoService {
 
   async cargarToken(){
     this.token = await this.storage.get('token') || null;
-    console.log('cargar token');
-    console.log(this.token);
   }
 
   async validaToken(): Promise<boolean>{
@@ -76,13 +72,8 @@ export class AccesoService {
 
       this.http.post(`${ URL }/app_token`, formData).subscribe(
         resp => {
-          console.log('from app_token');
-          console.log(resp);
-          
           if(resp['status']){
             this.usuario = resp['usuario'];
-            console.log(this.usuario);
-            
             resolve(true);
           }else{
             this.navCtrl.navigateRoot('/login');

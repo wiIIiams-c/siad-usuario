@@ -28,8 +28,6 @@ export class Tab1Page {
   siguientes(event?, pull: boolean = false){
     this.usuarioService.getUsuarios(pull).subscribe(
       resp => {
-        console.log('tab1 siguientes');
-        console.log(resp);
         this.usuarios.push(...resp.usuarios);
 
         if(event){

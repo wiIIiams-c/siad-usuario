@@ -29,7 +29,6 @@ export class Tab2Page {
 
     this.usuarioService.buscarUsuarios(valor).subscribe(
       resp => {
-        console.log(resp);
         this.usuarios = resp['usuarios'];
         this.buscando = false;
       }

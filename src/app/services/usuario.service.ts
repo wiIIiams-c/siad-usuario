@@ -40,8 +40,6 @@ export class UsuarioService {
     return new Promise(resolve => {
       this.http.post(`${ URL }/app_estado`, formData).subscribe(
         async resp => {
-          console.log(resp);
-
           if(resp['status']){
             resolve(true);
           }else{
