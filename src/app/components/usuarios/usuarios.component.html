@@ -24,6 +24,10 @@
       </ion-item>
   
       <ion-item-options side="end">
+        <ion-item-option color="secondary" (click)="mostrarInfo(user)">
+          <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        </ion-item-option>
+
         <ion-item-option color="danger" *ngIf="user.activo == 'SI'" (click)="actualizaEstado(user)">
           <ion-icon slot="icon-only" name="thumbs-down"></ion-icon>
         </ion-item-option>
