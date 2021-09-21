@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UiServiceService } from 'src/app/services/ui-service.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
+import { UsuarioInfoPage } from '../../pages/usuario-info/usuario-info.page';
 
 @Component({
   selector: 'app-usuarios',
@@ -16,7 +17,8 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private uiService: UiServiceService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -35,5 +37,16 @@ export class UsuariosComponent implements OnInit {
     }else{
       this.uiService.presentToast('Ha ocurrido un problema');
     }
+  }
+
+  async mostrarInfo(user: Usuario){
+    const modal = await this.modalCtrl.create({
+      component: UsuarioInfoPage,
+      componentProps: {
+        usuario: user
+      }
+    });
+
+    await modal.present();
   }
 }
