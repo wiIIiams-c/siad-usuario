@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref=""
+        (click)="cerrarModal()"
+        text="Regresar"
+        color="primary"
+      >
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ usuario.nombre }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <!-- <ion-list-header>
+      <ion-label>Datos Usuario</ion-label>
+    </ion-list-header> -->
+    
+    <form #formulario="ngForm" (ngSubmit)="onSubmit(formulario)">
+      <ion-item>
+        <ion-label>Usuario:</ion-label>
+        <ion-input type="text" placeholder="Usuario" name="usuario" [(ngModel)]="usuario.usuario" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Nombre:</ion-label>
+        <ion-input type="text" placeholder="Nombre" name="nombre" [(ngModel)]="usuario.nombre" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Mail:</ion-label>
+        <ion-input type="email" placeholder="Ingrese Mail" name="mail" [(ngModel)]="usuario.email"  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Activo:</ion-label>
+        <ion-input type="text" placeholder="Seleccione Estado" name="estado" [(ngModel)]="nombreEstado"></ion-input>
+        <ion-button (click)="mostrarEstado()" fill="clear" shape="round" slot="end">
+          Elige Estado
+        </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Aliado:</ion-label>
+        <ion-input type="text" placeholder="Seleccione Aliado" name="empresa" [(ngModel)]="nombreAliado"></ion-input>
+        <ion-button (click)="mostrarAliado()" fill="clear" shape="round" slot="end">
+          Elige Aliado
+        </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Sucursal/Empresa:</ion-label>
+        <ion-input type="text" placeholder="Ingrese Sucursal" name="sucursal" [(ngModel)]="usuario.sucursal"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Grupo:</ion-label>
+        <ion-input type="text" placeholder="Seleccione Grupo" name="grupo" [(ngModel)]="nombreGrupo"></ion-input>
+        <ion-button (click)="mostrarGrupo()" fill="clear" shape="round" slot="end">
+          Elige Grupo
+        </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Rol:</ion-label>
+        <ion-input type="text" placeholder="Seleccione Rol" name="rol" [(ngModel)]="nombreRol"></ion-input>
+        <ion-button (click)="mostrarRol()" fill="clear" shape="round" slot="end">
+          Elige Grupo
+        </ion-button>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" [disabled]="formulario.invalid">
+        ACTUALIZAR
+      </ion-button>
+    </form>
+  </ion-list>
+</ion-content>
