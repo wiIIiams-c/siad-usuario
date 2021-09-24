@@ -223,6 +223,10 @@ export class UsuarioInfoPage implements OnInit {
   }
 
   onSubmit(formulario: NgForm){
-
+    console.log('submit');
+    console.log(this.usuario);
+    console.log(formulario);
+    console.log(formulario.form.value);
+    console.log(formulario.form.value['empresa']);
   }
 }
