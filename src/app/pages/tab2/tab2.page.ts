@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/interfaces/interfaces';
+import { UiServiceService } from 'src/app/services/ui-service.service';
 
 @Component({
   selector: 'app-tab2',
@@ -14,8 +15,13 @@ export class Tab2Page {
   usuarios: Usuario[] = [];
 
   constructor(
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private uiService: UiServiceService
   ) {}
+
+  ngOnInit(){
+    this.uiService.dismiss();
+  }
 
   onSearchChange(event){
     const valor = event.detail.value;
