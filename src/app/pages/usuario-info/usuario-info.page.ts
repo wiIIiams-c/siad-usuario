@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Grupo, Rol, Usuario } from 'src/app/interfaces/interfaces';
-import { ModalController, PickerController, PickerOptions } from '@ionic/angular';
+import { ModalController, PickerController, PickerOptions, NavController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { SelectoresService } from 'src/app/services/selectores.service';
 import { Aliado } from 'src/app/interfaces/interfaces';
+import { UiServiceService } from 'src/app/services/ui-service.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-usuario-info',
@@ -21,14 +23,19 @@ export class UsuarioInfoPage implements OnInit {
   nombreGrupo: string = '';
   nombreRol: string = '';
   rolGrupo: string = '';
+  newUserData: Usuario = null;
 
   constructor(
     private modalCtrl: ModalController,
     private selectorService: SelectoresService,
-    private pickerCtrl: PickerController
+    private pickerCtrl: PickerController,
+    private uiServiceCtrl: UiServiceService,
+    private usuarioService: UsuarioService,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
+    this.uiServiceCtrl.dismiss();
     console.log(this.usuario);
     this.nombreAliado = this.usuario.empresa;
     this.nombreEstado = this.usuario.activo;
@@ -222,11 +229,30 @@ export class UsuarioInfoPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  onSubmit(formulario: NgForm){
-    console.log('submit');
-    console.log(this.usuario);
-    console.log(formulario);
-    console.log(formulario.form.value);
-    console.log(formulario.form.value['empresa']);
+  async onSubmit(formulario: NgForm){
+    if(formulario.invalid){ return; }
+    
+    const findAliado = this.empresas.find(elem => elem.nombre == formulario.form.value['empresa']);
+    const findGrupo = this.grupos.find(elem => elem.descripcion == formulario.form.value['grupo']);
+    const findRol = this.roles.find(elem => elem.descripcion == formulario.form.value['rol']);
+
+    this.newUserData = {
+      id: this.usuario.id,
+      activo: formulario.form.value['estado'],
+      empresa: findAliado.id,
+      grupo: findGrupo.id,
+      email: formulario.form.value['mail'],
+      rol: findRol.id,
+      sucursal: formulario.form.value['sucursal']
+    };
+
+    const validUpdate = await this.usuarioService.actualizaUsuarioInfo(this.newUserData);
+
+    if(validUpdate){
+      this.cerrarModal();
+      this.navCtrl.navigateRoot('/main/tabs/tab2', { animated: true });
+    }else{
+      this.uiServiceCtrl.presentToast('Ha ocurrido un problema');
+    }
   }
 }
