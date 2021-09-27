@@ -49,4 +49,28 @@ export class UsuarioService {
       );
     });
   }
+
+  actualizaUsuarioInfo(usuario: Usuario){
+    const formData = new FormData();
+
+    formData.append('_userId', usuario.id);
+    formData.append('_userActivo', usuario.activo);
+    formData.append('_userEmpresa', usuario.empresa);
+    formData.append('_userGrupo', usuario.grupo);
+    formData.append('_userEmail', usuario.email);
+    formData.append('_userRol', usuario.rol);
+    formData.append('_userSucursal', usuario.sucursal);
+
+    return new Promise(resolve => {
+      this.http.post(`${ URL }/app_updusr`, formData).subscribe(
+        async resp => {
+          if(resp['status']){
+            resolve(true);
+          }else{
+            resolve(false);
+          }
+        }
+      );
+    });
+  }
 }
