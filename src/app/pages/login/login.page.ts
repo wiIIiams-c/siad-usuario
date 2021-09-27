@@ -39,9 +39,12 @@ export class LoginPage implements OnInit {
 
     const valido = await this.accesoService.login(this.loginUser.user, this.loginUser.password);
 
+    this.uiService.present();
+
     if(valido){
       this.navCtrl.navigateRoot('/main/tabs/tab2', { animated: true });
     }else{
+      this.uiService.dismiss();
       this.uiService.presentToast('Datos Login Incorrectos');
     }
   }
