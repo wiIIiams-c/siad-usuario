@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RespuestaUsuarios, Usuario } from '../interfaces/interfaces';
 import { AccesoService } from './acceso.service';
+import { async } from '@angular/core/testing';
 
 const URL = environment.url;
 
@@ -32,8 +33,28 @@ export class UsuarioService {
     return this.http.get<RespuestaUsuarios>(`${ URL }/app_busca/${ buscar }`);
   }
 
+  actualizaUsuarioPassword(usr_id: string, usr_pwd: string){
+    const formData = new FormData();
+    
+    formData.append('_userId', usr_id);
+    formData.append('_userPwd', usr_pwd);
+
+    return new Promise(resolve => {
+      this.http.post(`${ URL }/app_updpwd`, formData).subscribe(
+        async resp => {
+          if(resp['status']){
+            resolve(true);
+          }else{
+            resolve(false);
+          }
+        }
+      );
+    });
+  }
+
   actualizaUsuarioEstado(usr_id: string, usr_estado: string){
     const formData = new FormData();
+    
     formData.append('_userId', usr_id);
     formData.append('_userEstado', usr_estado);
 
