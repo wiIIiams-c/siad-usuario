@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UiServiceService } from 'src/app/services/ui-service.service';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { UsuarioInfoPage } from '../../pages/usuario-info/usuario-info.page';
 
 @Component({
@@ -18,7 +18,8 @@ export class UsuariosComponent implements OnInit {
     private usuarioService: UsuarioService,
     private uiService: UiServiceService,
     private navCtrl: NavController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
@@ -48,5 +49,42 @@ export class UsuariosComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  async actualizaClave(user: Usuario){
+    const alertPwd = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Nueva Clave ' + user.nombre,
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Password',
+          type: 'password',
+          placeholder: 'Nueva Password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Confirmar',
+          handler: async (data: string) => {
+            const valido = await this.usuarioService.actualizaUsuarioPassword(user.id, data['Password']);
+
+            if(valido){
+              this.uiService.presentToast('Password Actualizada');
+              //redirect or reload parent page
+            }else{
+              this.uiService.presentToast('Ha ocurrido un problema');
+            }
+          }
+        }
+      ]
+    });
+
+    await alertPwd.present();
   }
 }
