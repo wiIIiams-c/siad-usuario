@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Grupo, Rol, Usuario } from 'src/app/interfaces/interfaces';
 import { ModalController, PickerController, PickerOptions, NavController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
@@ -15,6 +15,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class UsuarioInfoPage implements OnInit {
 
   @Input() usuario: Usuario = null;
+  @Output() estadoModal = new EventEmitter<boolean>();
   empresas: Aliado[] = [];
   grupos: Grupo[] = [];
   roles: Rol[] = [];
@@ -226,6 +227,7 @@ export class UsuarioInfoPage implements OnInit {
   }
 
   cerrarModal(){
+    this.estadoModal.emit(true);
     this.modalCtrl.dismiss();
   }
 

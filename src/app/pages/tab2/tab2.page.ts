@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UiServiceService } from 'src/app/services/ui-service.service';
+import { IonSearchbar } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -13,6 +14,7 @@ export class Tab2Page {
   usuarioBuscar = '';
   buscando = false;
   usuarios: Usuario[] = [];
+  @ViewChild('buscarUsuario') searchBar: IonSearchbar;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -39,5 +41,13 @@ export class Tab2Page {
         this.buscando = false;
       }
     );
+  }
+
+  recibeEstadoPwd(event){
+    if(event){
+      this.usuarios = [];
+      this.buscando = false;
+      this.searchBar.value = null;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UiServiceService } from 'src/app/services/ui-service.service';
@@ -13,6 +13,7 @@ import { UsuarioInfoPage } from '../../pages/usuario-info/usuario-info.page';
 export class UsuariosComponent implements OnInit {
 
   @Input() usuarios: Usuario[] = [];
+  @Output() estadoPwd = new EventEmitter<boolean>();
 
   constructor(
     private usuarioService: UsuarioService,
@@ -75,6 +76,7 @@ export class UsuariosComponent implements OnInit {
             const valido = await this.usuarioService.actualizaUsuarioPassword(user.id, data['Password']);
 
             if(valido){
+              this.estadoPwd.emit(true);
               this.uiService.presentToast('Password Actualizada');
               //redirect or reload parent page
             }else{

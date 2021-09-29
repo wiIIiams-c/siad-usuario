@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-toolbar>
-  <ion-searchbar placeholder="Buscar Usuario" (ionChange)="onSearchChange($event)" [debounce]="700" [value]="usuarioBuscar" animated></ion-searchbar>
+  <ion-searchbar #buscarUsuario placeholder="Buscar Usuario" (ionChange)="onSearchChange($event)" [debounce]="700" [value]="usuarioBuscar" animated></ion-searchbar>
 </ion-toolbar>
 
 <ion-content color="light">
@@ -24,5 +24,5 @@
   </ion-grid>
 
   <!-- Usuarios -->
-  <app-usuarios [usuarios]="usuarios"></app-usuarios>
+  <app-usuarios (estadoPwd)="recibeEstadoPwd($event)" [usuarios]="usuarios"></app-usuarios>
 </ion-content>
