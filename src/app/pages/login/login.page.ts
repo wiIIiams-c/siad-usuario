@@ -15,8 +15,8 @@ export class LoginPage implements OnInit {
   @ViewChild('slidePrincipal') slides: IonSlides;
   
   loginUser = {
-    user: 'willtest',
-    password: '123456'
+    user: '',
+    password: ''
   }
 
   constructor(
