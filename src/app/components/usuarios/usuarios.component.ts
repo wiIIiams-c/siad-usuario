@@ -34,7 +34,7 @@ export class UsuariosComponent implements OnInit {
       this.uiService.presentToast('Estado usuario actualizado');
 
       setTimeout(() => {
-        this.navCtrl.navigateRoot('/main/tabs/tab2', { animated: true });
+        this.estadoPwd.emit(true);
       }, 2000);
     }else{
       this.uiService.presentToast('Ha ocurrido un problema');
