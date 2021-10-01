@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage-angular';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
+import { StorageServiceService } from './storage-service.service';
 
 const URL = environment.url;
 
@@ -17,7 +18,8 @@ export class AccesoService {
   constructor(
     private http: HttpClient,
     private storage: Storage,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private storageService: StorageServiceService
   ) { }
 
   login(user: string, password: string){
@@ -33,7 +35,8 @@ export class AccesoService {
             resolve(true);
           }else{
             this.token = null;
-            this.storage.clear();
+            //this.storage.clear();
+            this.storageService.clear();
             resolve(false);
           }
         }
@@ -44,18 +47,21 @@ export class AccesoService {
   logout(){
     this.token = null;
     this.usuario = null;
-    this.storage.clear();
+    //this.storage.clear();
+    this.storageService.clear();
     this.navCtrl.navigateRoot('/login', { animated: true });
   }
 
   async guardarToken(token: string){
     this.token = token;
-    await this.storage.set('token', token);
+    //await this.storage.set('token', token);
+    this.storageService.set('token', token);
     await this.validaToken();
   }
 
   async cargarToken(){
-    this.token = await this.storage.get('token') || null;
+    //this.token = await this.storage.get('token') || null;
+    this.token = await this.storageService.get('token') || null;
   }
 
   async validaToken(): Promise<boolean>{
