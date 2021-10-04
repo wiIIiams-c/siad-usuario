@@ -35,7 +35,6 @@ export class AccesoService {
             resolve(true);
           }else{
             this.token = null;
-            //this.storage.clear();
             this.storageService.clear();
             resolve(false);
           }
@@ -47,20 +46,25 @@ export class AccesoService {
   logout(){
     this.token = null;
     this.usuario = null;
-    //this.storage.clear();
     this.storageService.clear();
     this.navCtrl.navigateRoot('/login', { animated: true });
   }
 
+  getUsuario(){
+    if(!this.usuario.id){
+      this.validaToken();
+    }
+
+    return {...this.usuario};
+  }
+
   async guardarToken(token: string){
     this.token = token;
-    //await this.storage.set('token', token);
     this.storageService.set('token', token);
     await this.validaToken();
   }
 
   async cargarToken(){
-    //this.token = await this.storage.get('token') || null;
     this.token = await this.storageService.get('token') || null;
   }
 
