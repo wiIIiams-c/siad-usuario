@@ -15,4 +15,45 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-list>
+    <ion-item>
+      <ion-label>Usuario:</ion-label>
+      <ion-input type="text" placeholder="Usuario" name="usuario" [(ngModel)]="usuario.usuario" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-input type="text" placeholder="Nombre" name="nombre" [(ngModel)]="usuario.nombre" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Mail:</ion-label>
+      <ion-input type="email" placeholder="Ingrese Mail" name="mail" [(ngModel)]="usuario.email" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Activo:</ion-label>
+      <ion-input type="text" placeholder="Seleccione Estado" name="estado" [(ngModel)]="usuario.activo" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Aliado:</ion-label>
+      <ion-input type="text" placeholder="Seleccione Aliado" name="empresa" [(ngModel)]="usuario.empresa" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sucursal/Empresa:</ion-label>
+      <ion-input type="text" placeholder="Ingrese Sucursal" name="sucursal" [(ngModel)]="usuario.sucursal" readonly></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Grupo:</ion-label>
+      <ion-input type="text" placeholder="Seleccione Grupo" name="grupo" [(ngModel)]="usuario.grupoNombre" readonly></ion-input>        
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Rol:</ion-label>
+      <ion-input type="text" placeholder="Seleccione Rol" name="rol" [(ngModel)]="usuario.rolNombre" readonly></ion-input>        
+    </ion-item>
+  </ion-list>
 </ion-content>
