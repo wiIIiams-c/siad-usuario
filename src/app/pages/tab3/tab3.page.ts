@@ -11,11 +11,16 @@ import { UiServiceService } from 'src/app/services/ui-service.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  usuario: Usuario = {};
 
   constructor(
     private accesoService: AccesoService,
     private uiService: UiServiceService
   ) {}
+
+  ngOnInit(){
+    this.usuario = this.accesoService.getUsuario();
+  }
 
   logout() {
     this.accesoService.logout();
