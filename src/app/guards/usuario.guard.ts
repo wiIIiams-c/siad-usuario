@@ -14,10 +14,4 @@ export class UsuarioGuard implements CanLoad {
   canLoad(): Observable<boolean> | Promise<boolean> | boolean {
     return this.accesoService.validaToken();
   }
-
-  /* canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  } */
 }
