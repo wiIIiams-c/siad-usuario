@@ -45,7 +45,7 @@ export class UiServiceService {
       a => {
         a.present().then(
           () => {
-            console.log('presented');
+            console.log('presented');            
             if(!this.isLoading){
               a.dismiss().then(
                 () => console.log('abort presenting')
