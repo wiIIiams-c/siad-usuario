@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonSlides, NavController } from '@ionic/angular';
 import { AccesoService } from 'src/app/services/acceso.service';
-import { Storage } from '@ionic/storage-angular';
 import { UiServiceService } from 'src/app/services/ui-service.service';
 import { Usuario } from 'src/app/interfaces/interfaces';
+import { LoadingServiceService } from 'src/app/services/loading-service.service';
+import { StorageServiceService } from 'src/app/services/storage-service.service';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +22,14 @@ export class LoginPage implements OnInit {
 
   constructor(
     private accesoService: AccesoService,
-    private storage: Storage,
     private navCtrl: NavController,
-    private uiService: UiServiceService
+    private uiService: UiServiceService,
+    private loadingService: LoadingServiceService,
+    private storageService: StorageServiceService
   ) { }
 
   async ngOnInit() {
-    await this.storage.create();
+    await this.storageService.init();
   }
 
   ionViewDidEnter(){
@@ -39,12 +41,12 @@ export class LoginPage implements OnInit {
 
     const valido = await this.accesoService.login(this.loginUser.user, this.loginUser.password);
 
-    this.uiService.present();
+    await this.loadingService.present('Iniciando...');
 
     if(valido){
       this.navCtrl.navigateRoot('/main/tabs/tab2', { animated: true });
     }else{
-      this.uiService.dismiss();
+      this.loadingService.dismiss();
       this.uiService.presentToast('Datos Login Incorrectos');
     }
   }
