@@ -5,12 +5,11 @@ import { AlertController, LoadingController, ToastController } from '@ionic/angu
   providedIn: 'root'
 })
 export class UiServiceService {
-  isLoading = false;
+  
 
   constructor(
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
+    private toastCtrl: ToastController
   ) { }
 
   async alertaInformativa(message: string){
@@ -33,35 +32,5 @@ export class UiServiceService {
     });
 
     toast.present();
-  }
-
-  async present(){
-    this.isLoading = true;
-
-    return await this.loadingCtrl.create({
-      message: 'Iniciando Sesion...',
-      spinner: 'lines'
-    }).then(
-      a => {
-        a.present().then(
-          () => {
-            console.log('presented');            
-            if(!this.isLoading){
-              a.dismiss().then(
-                () => console.log('abort presenting')
-              );
-            }
-          }
-        );
-      }
-    );
-  }
-
-  async dismiss(){
-    this.isLoading = false;
-
-    return await this.loadingCtrl.dismiss().then(
-      () => console.log('dismissed')
-    );
   }
 }
