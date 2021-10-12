@@ -6,6 +6,7 @@ import { SelectoresService } from 'src/app/services/selectores.service';
 import { Aliado } from 'src/app/interfaces/interfaces';
 import { UiServiceService } from 'src/app/services/ui-service.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { LoadingServiceService } from 'src/app/services/loading-service.service';
 
 @Component({
   selector: 'app-usuario-info',
@@ -32,11 +33,12 @@ export class UsuarioInfoPage implements OnInit {
     private pickerCtrl: PickerController,
     private uiServiceCtrl: UiServiceService,
     private usuarioService: UsuarioService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private loadingService: LoadingServiceService
   ) { }
 
   ngOnInit() {
-    this.uiServiceCtrl.dismiss();
+    //this.loadingService.dismiss();
     console.log(this.usuario);
     this.nombreAliado = this.usuario.empresa;
     this.nombreEstado = this.usuario.activo;
