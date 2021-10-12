@@ -8,7 +8,7 @@ export class StorageServiceService {
   private _storage: Storage | null = null;
 
   constructor(private storage: Storage) {
-    this.init();
+    //this.init();
   }
 
   async init() {
@@ -25,6 +25,7 @@ export class StorageServiceService {
   }
 
   async clear(){
-    await this._storage.clear();
+    this._storage = null;
+    await this.storage.clear();
   }
 }
