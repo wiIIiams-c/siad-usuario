@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/interfaces/interfaces';
-import { UiServiceService } from 'src/app/services/ui-service.service';
 import { IonSearchbar } from '@ionic/angular';
+import { LoadingServiceService } from 'src/app/services/loading-service.service';
 
 @Component({
   selector: 'app-tab2',
@@ -18,11 +18,11 @@ export class Tab2Page {
 
   constructor(
     private usuarioService: UsuarioService,
-    private uiService: UiServiceService
+    private loadingService: LoadingServiceService
   ) {}
 
-  ngOnInit(){
-    this.uiService.dismiss();
+  async ngOnInit(){
+    await this.loadingService.dismiss();
   }
 
   onSearchChange(event){
