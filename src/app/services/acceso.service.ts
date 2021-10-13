@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Storage } from '@ionic/storage-angular';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
@@ -17,7 +16,6 @@ export class AccesoService {
 
   constructor(
     private http: HttpClient,
-    private storage: Storage,
     private navCtrl: NavController,
     private storageService: StorageServiceService
   ) { }
