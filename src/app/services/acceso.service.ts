@@ -33,7 +33,8 @@ export class AccesoService {
             resolve(true);
           }else{
             this.token = null;
-            this.storageService.clear();
+            //this.storageService.clear();
+            this.storageService.remove('token');
             resolve(false);
           }
         }
@@ -43,7 +44,7 @@ export class AccesoService {
 
   logout(){
     this.token = null;
-    this.usuario = null;
+    this.usuario = <Usuario>{};
     this.storageService.clear();
     this.navCtrl.navigateRoot('/login', { animated: true });
   }
