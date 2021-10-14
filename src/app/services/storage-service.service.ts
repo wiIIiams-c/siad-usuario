@@ -28,4 +28,8 @@ export class StorageServiceService {
     this._storage = null;
     await this.storage.clear();
   }
+
+  async remove(key: string){
+    await this._storage.remove(key);
+  }
 }
