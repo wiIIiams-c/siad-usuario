@@ -76,10 +76,11 @@ export class AccesoService {
     }
 
     return new Promise<boolean>(resolve => {
-      const formData = new FormData();
-      formData.append('x-token', this.token);
+      const headers = new HttpHeaders({
+        'x-token': this.token
+      });
 
-      this.http.post(`${ URL }/app_token`, formData).subscribe(
+      this.http.get(`${ URL }/app_token`, { headers }).subscribe(
         resp => {
           if(resp['status']){
             this.usuario = resp['usuario'];
