@@ -49,9 +49,9 @@ export class AccesoService {
     this.navCtrl.navigateRoot('/login', { animated: true });
   }
 
-  getUsuario(){
+  async getUsuario(){
     if(!this.usuario.id){
-      this.validaToken();
+      await this.validaToken();
     }
 
     return {...this.usuario};
@@ -69,7 +69,7 @@ export class AccesoService {
 
   async validaToken(): Promise<boolean>{
     await this.cargarToken();
-
+    
     if(!this.token){
       this.navCtrl.navigateRoot('/login');
       return Promise.resolve(false);
