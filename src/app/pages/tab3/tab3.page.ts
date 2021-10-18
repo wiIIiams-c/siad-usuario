@@ -18,8 +18,8 @@ export class Tab3Page {
     private uiService: UiServiceService
   ) {}
 
-  ngOnInit(){
-    this.usuario = this.accesoService.getUsuario();
+  async ngOnInit(){
+    this.usuario = await this.accesoService.getUsuario();
   }
 
   logout() {
