@@ -94,8 +94,10 @@ export class UsuarioInfoPage implements OnInit {
 
     picker.present();
     picker.onDidDismiss().then(async data => {
-      let col = await picker.getColumn('estado');
-      this.nombreEstado = col.options[col.selectedIndex].text;
+      if(data['role'] != 'cancel'){
+        let col = await picker.getColumn('estado');
+        this.nombreEstado = col.options[col.selectedIndex].text;
+      }
     });
   }
 
@@ -122,9 +124,11 @@ export class UsuarioInfoPage implements OnInit {
 
     picker.present();
     picker.onDidDismiss().then(async data => {
-      let col = await picker.getColumn('aliado');
-      console.log('col: ', col);
-      this.nombreAliado = col.options[col.selectedIndex].text;
+      if(data['role'] != 'cancel'){
+        let col = await picker.getColumn('aliado');
+        console.log('col: ', col);
+        this.nombreAliado = col.options[col.selectedIndex].text;
+      }
     });
   }
 
@@ -151,10 +155,12 @@ export class UsuarioInfoPage implements OnInit {
 
     picker.present();
     picker.onDidDismiss().then(async data => {
-      let col = await picker.getColumn('grupo');
-      console.log('col ', col);
-      this.nombreGrupo = col.options[col.selectedIndex].text;
-      this.rolGrupo = col.options[col.selectedIndex].value;
+      if(data['role'] != 'cancel'){
+        let col = await picker.getColumn('grupo');
+        console.log('col ', col);
+        this.nombreGrupo = col.options[col.selectedIndex].text;
+        this.rolGrupo = col.options[col.selectedIndex].value;
+      }
     });
   }
 
@@ -181,9 +187,11 @@ export class UsuarioInfoPage implements OnInit {
 
     picker.present();
     picker.onDidDismiss().then(async data => {
-      let col = await picker.getColumn('rol');
-      console.log(col);
-      this.nombreRol = col.options[col.selectedIndex].text;
+      if(data['role'] != 'cancel'){
+        let col = await picker.getColumn('rol');
+        console.log(col);
+        this.nombreRol = col.options[col.selectedIndex].text;
+      }
     });
   }
 
