@@ -29,7 +29,7 @@ export class AccesoService {
       this.http.post(`${ URL }/app_login`, formData).subscribe(
         async resp => {
           if(resp['status']){
-            this.guardarToken(resp['token']);
+            await this.guardarToken(resp['token']);
             resolve(true);
           }else{
             this.token = null;
