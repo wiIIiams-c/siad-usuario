@@ -49,12 +49,20 @@ export class UsuariosComponent implements OnInit {
       }
     });
 
-    await modal.present();
+    modal.onDidDismiss().then(
+      (resp) => {
+        if(resp){
+          console.log('cierro modal y lee la variable que le asigne al dismiss');
+          
+        }
+      }
+    )
+
+    return await modal.present();
   }
 
   async actualizaClave(user: Usuario){
     const alertPwd = await this.alertCtrl.create({
-      cssClass: 'my-custom-class',
       header: 'Nueva Clave ' + user.nombre,
       backdropDismiss: false,
       inputs: [
