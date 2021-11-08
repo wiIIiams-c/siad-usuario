@@ -38,8 +38,6 @@ export class UsuarioInfoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.loadingService.dismiss();
-    console.log(this.usuario);
     this.nombreAliado = this.usuario.empresa;
     this.nombreEstado = this.usuario.activo;
     this.nombreGrupo = this.usuario.grupoNombre;
@@ -126,7 +124,6 @@ export class UsuarioInfoPage implements OnInit {
     picker.onDidDismiss().then(async data => {
       if(data['role'] != 'cancel'){
         let col = await picker.getColumn('aliado');
-        console.log('col: ', col);
         this.nombreAliado = col.options[col.selectedIndex].text;
       }
     });
@@ -157,7 +154,7 @@ export class UsuarioInfoPage implements OnInit {
     picker.onDidDismiss().then(async data => {
       if(data['role'] != 'cancel'){
         let col = await picker.getColumn('grupo');
-        console.log('col ', col);
+        this.nombreRol = '';
         this.nombreGrupo = col.options[col.selectedIndex].text;
         this.rolGrupo = col.options[col.selectedIndex].value;
       }
@@ -189,7 +186,6 @@ export class UsuarioInfoPage implements OnInit {
     picker.onDidDismiss().then(async data => {
       if(data['role'] != 'cancel'){
         let col = await picker.getColumn('rol');
-        console.log(col);
         this.nombreRol = col.options[col.selectedIndex].text;
       }
     });
@@ -236,9 +232,9 @@ export class UsuarioInfoPage implements OnInit {
     return listaRol;
   }
 
-  cerrarModal(){
-    this.estadoModal.emit(true);
-    this.modalCtrl.dismiss();
+  async cerrarModal(){
+    //this.estadoModal.emit(true);
+    await this.modalCtrl.dismiss(true);
   }
 
   async onSubmit(formulario: NgForm){
@@ -262,7 +258,7 @@ export class UsuarioInfoPage implements OnInit {
 
     if(validUpdate){
       this.cerrarModal();
-      this.navCtrl.navigateRoot('/main/tabs/tab2', { animated: true });
+      //this.navCtrl.navigateRoot('/main/tabs/tab2', { animated: true });
     }else{
       this.uiServiceCtrl.presentToast('Ha ocurrido un problema');
     }
