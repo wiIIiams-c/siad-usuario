@@ -233,7 +233,6 @@ export class UsuarioInfoPage implements OnInit {
   }
 
   async cerrarModal(){
-    //this.estadoModal.emit(true);
     await this.modalCtrl.dismiss(true);
   }
 
