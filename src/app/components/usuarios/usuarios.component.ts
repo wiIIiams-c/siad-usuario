@@ -13,7 +13,7 @@ import { UsuarioInfoPage } from '../../pages/usuario-info/usuario-info.page';
 export class UsuariosComponent implements OnInit {
 
   @Input() usuarios: Usuario[] = [];
-  @Output() estadoPwd = new EventEmitter<boolean>();
+  @Output() estadoEmitter = new EventEmitter<boolean>();
 
   constructor(
     private usuarioService: UsuarioService,
@@ -34,7 +34,7 @@ export class UsuariosComponent implements OnInit {
       this.uiService.presentToast('Estado usuario actualizado');
 
       setTimeout(() => {
-        this.estadoPwd.emit(true);
+        this.estadoEmitter.emit(true);
       }, 2000);
     }else{
       this.uiService.presentToast('Ha ocurrido un problema');
@@ -52,8 +52,7 @@ export class UsuariosComponent implements OnInit {
     modal.onDidDismiss().then(
       (resp) => {
         if(resp){
-          console.log('cierro modal y lee la variable que le asigne al dismiss');
-          
+          this.estadoEmitter.emit(true);
         }
       }
     )
@@ -84,7 +83,7 @@ export class UsuariosComponent implements OnInit {
             const valido = await this.usuarioService.actualizaUsuarioPassword(user.id, data['Password']);
 
             if(valido){
-              this.estadoPwd.emit(true);
+              this.estadoEmitter.emit(true);
               this.uiService.presentToast('Password Actualizada');
               //redirect or reload parent page
             }else{
