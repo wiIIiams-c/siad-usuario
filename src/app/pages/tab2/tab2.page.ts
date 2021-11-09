@@ -43,7 +43,7 @@ export class Tab2Page {
     );
   }
 
-  recibeEstadoPwd(event){
+  recibeEstadoEmitter(event){
     if(event){
       this.usuarios = [];
       this.buscando = false;
